@@ -17,17 +17,17 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Build Docker image
-        run: docker build . -t ${{ secrets.DOCKER_USERNAME }}/mi-app:${{ github.sha }}
+        run: docker build . -t luissoto25/mi-app:${{ github.sha }}
 
       - name: Log in to Docker Hub
         run: docker login -u luissoto25 -p Mathias2024$$ https://github.com/lsoto25/Dev.git
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/mi-app:${{ github.sha }}
+        run: docker push luissoto25/mi-app:${{ github.sha }}
 
       - name: Update Kubernetes manifests
         run: |
-          sed -i 's|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/mi-app:${{ github.sha }}|' k8/deployment.yaml
+          sed -i 's|image: .*|image: luissoto25/mi-app:${{ github.sha }}|' k8/deployment.yaml
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git commit -am "Updated image to ${{ github.sha }} [ci-skip]"
