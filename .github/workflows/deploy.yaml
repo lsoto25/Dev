@@ -20,7 +20,7 @@ jobs:
         run: docker build . -t ${{ secrets.DOCKER_USERNAME }}/mi-app:${{ github.sha }}
 
       - name: Log in to Docker Hub
-        run: echo ${{secrets.DOCKER_PASSWORD}} | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
+        run: docker login -u luissoto25 -p Mathias2024$$ https://github.com/lsoto25/Dev.git
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/mi-app:${{ github.sha }}
